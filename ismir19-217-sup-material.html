@@ -13156,13 +13156,14 @@ div#notebook {
 
   
 
-  <div class="
+  <div class="nbinteract-hide_in
       cell border-box-sizing code_cell rendered">
     <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#nbi:hide_in</span>
+<span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">data_loader.data_loaders</span> <span class="k">as</span> <span class="nn">module_data</span>
 <span class="kn">from</span> <span class="nn">data_loader.data_loaders</span> <span class="k">import</span> <span class="n">NormDataLoader</span>
 <span class="kn">import</span> <span class="nn">model.model</span> <span class="k">as</span> <span class="nn">module_arch</span>
@@ -13236,14 +13237,6 @@ div#notebook {
 <span class="n">model</span><span class="o">.</span><span class="n">is_featExtract</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">data_loader</span> <span class="o">=</span> <span class="n">get_instance</span><span class="p">(</span><span class="n">module_data</span><span class="p">,</span> <span class="s1">&#39;data_loader&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 <span class="n">valid_data_loader</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">split_validation</span><span class="p">()</span>
-<span class="n">pitch_map</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">pitch_map</span>
-<span class="n">pitchclass_map</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">pitchclass_map</span>
-<span class="n">octave_map</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))}</span>
-<span class="n">inv_pitch_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pitch_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-<span class="n">inv_pitchclass_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pitchclass_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-<span class="n">desired_ins_key</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ehn&#39;</span><span class="p">,</span> <span class="s1">&#39;Fhn&#39;</span><span class="p">,</span> <span class="s1">&#39;Trtb&#39;</span><span class="p">,</span> <span class="s1">&#39;Trop&#39;</span><span class="p">,</span> <span class="s1">&#39;Pno&#39;</span><span class="p">,</span> <span class="s1">&#39;Vn&#39;</span><span class="p">,</span> <span class="s1">&#39;Vc&#39;</span><span class="p">,</span> <span class="s1">&#39;Sax&#39;</span><span class="p">,</span> <span class="s1">&#39;Bn&#39;</span><span class="p">,</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="s1">&#39;Fl&#39;</span><span class="p">,</span> <span class="s1">&#39;Ob&#39;</span><span class="p">]</span>
-<span class="n">ins_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">desired_ins_key</span><span class="p">)}</span>
-<span class="n">inv_ins_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ins_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </pre></div>
 
     </div>
@@ -13266,7 +13259,16 @@ div#notebook {
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">control_syn</span><span class="p">(</span><span class="n">octave</span><span class="p">,</span> <span class="n">pitchclass</span><span class="p">,</span> <span class="n">instrument</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pitch_map</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">pitch_map</span>
+<span class="n">pitchclass_map</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">pitchclass_map</span>
+<span class="n">octave_map</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))}</span>
+<span class="n">inv_pitch_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pitch_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">inv_pitchclass_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pitchclass_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">desired_ins_key</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ehn&#39;</span><span class="p">,</span> <span class="s1">&#39;Fhn&#39;</span><span class="p">,</span> <span class="s1">&#39;Trtb&#39;</span><span class="p">,</span> <span class="s1">&#39;Trop&#39;</span><span class="p">,</span> <span class="s1">&#39;Pno&#39;</span><span class="p">,</span> <span class="s1">&#39;Vn&#39;</span><span class="p">,</span> <span class="s1">&#39;Vc&#39;</span><span class="p">,</span> <span class="s1">&#39;Sax&#39;</span><span class="p">,</span> <span class="s1">&#39;Bn&#39;</span><span class="p">,</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="s1">&#39;Fl&#39;</span><span class="p">,</span> <span class="s1">&#39;Ob&#39;</span><span class="p">]</span>
+<span class="n">ins_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">desired_ins_key</span><span class="p">)}</span>
+<span class="n">inv_ins_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ins_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="k">def</span> <span class="nf">control_syn</span><span class="p">(</span><span class="n">octave</span><span class="p">,</span> <span class="n">pitchclass</span><span class="p">,</span> <span class="n">instrument</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">pitch</span> <span class="o">=</span> <span class="n">inv_pitchclass_map</span><span class="p">[</span><span class="n">pitchclass</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">inv_ins_map</span><span class="p">[</span><span class="n">instrument</span><span class="p">])</span>
@@ -13295,16 +13297,6 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;A&#39;: 0, &#39;A#&#39;: 1, &#39;B&#39;: 2, &#39;C&#39;: 3, &#39;C#&#39;: 4, &#39;D&#39;: 5, &#39;D#&#39;: 6, &#39;E&#39;: 7, &#39;F&#39;: 8, &#39;F#&#39;: 9, &#39;G&#39;: 10, &#39;G#&#39;: 11}
-</pre>
-</div>
-</div>
 
 <div class="output_area">
 
