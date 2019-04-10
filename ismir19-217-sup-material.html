@@ -13175,7 +13175,6 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">interact</span>
 </pre></div>
 
     </div>
@@ -13193,6 +13192,14 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#nbi:hide_in</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;/data/yinjyun/projects/gmvae-timbre/gmvae_v2-timbre/saved/Sol_GMVAE_v2/melspec_256-first_chunk-include_onset-fix_piano-normalize-ss_1.0-latent_16-pow_0-lvl_0-pc_1-pd_1-val_lower_bound/model_best.pth&#39;</span>
+<span class="n">sr</span> <span class="o">=</span> <span class="mi">22050</span>
+<span class="n">n_fft</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">n_mel</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">hop_length</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">fmin</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="n">fmax</span> <span class="o">=</span> <span class="mi">11000</span>
+
 <span class="k">def</span> <span class="nf">griffinlim</span><span class="p">(</span><span class="n">spectrogram</span><span class="p">,</span> <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">window</span> <span class="o">=</span> <span class="s1">&#39;hann&#39;</span><span class="p">,</span> <span class="n">n_fft</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">hop_length</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">hop_length</span> <span class="o">=</span> <span class="n">n_fft</span> <span class="o">//</span> <span class="mi">4</span>
@@ -13250,13 +13257,6 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#nbi:hide_in</span>
-<span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;/data/yinjyun/projects/gmvae-timbre/gmvae_v2-timbre/saved/Sol_GMVAE_v2/melspec_256-first_chunk-include_onset-fix_piano-normalize-ss_1.0-latent_16-pow_0-lvl_0-pc_1-pd_1-val_lower_bound/model_best.pth&#39;</span>
-<span class="n">sr</span> <span class="o">=</span> <span class="mi">22050</span>
-<span class="n">n_fft</span> <span class="o">=</span> <span class="mi">2048</span>
-<span class="n">n_mel</span> <span class="o">=</span> <span class="mi">256</span>
-<span class="n">hop_length</span> <span class="o">=</span> <span class="mi">256</span>
-<span class="n">fmin</span> <span class="o">=</span> <span class="mi">27</span>
-<span class="n">fmax</span> <span class="o">=</span> <span class="mi">11000</span>
 <span class="n">resume</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">resume</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]</span>
 <span class="n">n_class</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;arch&#39;</span><span class="p">][</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="s1">&#39;n_class&#39;</span><span class="p">]</span>
@@ -13286,7 +13286,7 @@ div#notebook {
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Controllable-Synthesis-of-Instrument-Sounds">Controllable Synthesis of Instrument Sounds<a class="anchor-link" href="#Controllable-Synthesis-of-Instrument-Sounds">&#182;</a></h1><h2 id="Given-pitches-and-instrument-to-play-with">Given pitches and instrument to play with<a class="anchor-link" href="#Given-pitches-and-instrument-to-play-with">&#182;</a></h2>
+<h1 id="Controllable-Synthesis-of-Instrument-Sounds">Controllable Synthesis of Instrument Sounds<a class="anchor-link" href="#Controllable-Synthesis-of-Instrument-Sounds">&#182;</a></h1><h2 id="Given-pitches-and-instrument-to-play-with-(loading-widgets-can-take-a-while-...)">Given pitches and instrument to play with (loading widgets can take a while ...)<a class="anchor-link" href="#Given-pitches-and-instrument-to-play-with-(loading-widgets-can-take-a-while-...)">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13318,7 +13318,7 @@ div#notebook {
     <span class="n">S_stft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mel_filter</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">griffinlim</span><span class="p">(</span><span class="n">S_stft</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Audio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">sr</span><span class="p">))</span>
-
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">interact</span>
 <span class="n">interact</span><span class="p">(</span><span class="n">control_syn</span><span class="p">,</span> <span class="n">octave</span><span class="o">=</span><span class="n">octave_map</span><span class="p">,</span> <span class="n">pitchclass</span><span class="o">=</span><span class="n">pitchclass_map</span><span class="p">,</span> <span class="n">instrument</span><span class="o">=</span><span class="n">ins_map</span><span class="p">)</span>
 </pre></div>
 
